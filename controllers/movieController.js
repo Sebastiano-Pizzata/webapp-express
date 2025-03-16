@@ -7,7 +7,13 @@ function index(req, res) {
         if (err) return res.status(500).json({
             error: 'Errore server INDEx function'
         })
-        res.json(results)
+        const movies = results.map(movie => {
+            return {
+                ...movie,
+                image: req.imagePath + movie.image
+            }
+        })
+        res.json(movies)
     })
 }
 
@@ -36,7 +42,12 @@ function show(req, res) {
             })
 
             movie.reviews = reviewsResults;
-            res.json(movie)
+
+            res.json({
+                ...movie,
+                image: req.imagePath + movie.image
+            })
+
         })
 
     })
