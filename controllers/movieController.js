@@ -55,6 +55,21 @@ function show(req, res) {
 }
 
 
+function update(req, res) {
+    const { id } = req.params;
+    const { image } = req.body;
+
+    const sql = 'Update movies SET image = ? WHERE id = ?'
+
+    connection.query(sql, [image, id], (err) => {
+        if (err) return res.status(500).json({
+            error: "Errore Server UPDATE function"
+        })
+        res.json({ message: "Movie updated Successfully" })
+    })
+}
+
+
 function destroy(req, res) {
     const { id } = req.params;
 
@@ -73,5 +88,6 @@ function destroy(req, res) {
 export {
     index,
     show,
+    update,
     destroy
 }
