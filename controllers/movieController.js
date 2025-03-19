@@ -23,7 +23,7 @@ function show(req, res) {
 
     const moviesSql = 'SELECT * FROM movies WHERE id = ?'
 
-    const reviewsSql = 'SELECT * FROM movies WHERE id = ?'
+    const reviewsSql = 'SELECT * FROM reviews WHERE movie_id = ?'
 
     connection.query(moviesSql, [id], (err, results) => {
         if (err) return res.status(500).json({
